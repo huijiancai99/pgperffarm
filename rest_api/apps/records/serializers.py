@@ -134,7 +134,7 @@ class LinuxInfoSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = LinuxInfo
-        fields = ('mounts', 'cpuinfo', 'sysctl', 'meminfo')
+        fields = ('mounts', 'cpuinfo', 'sysctl', 'meminfo', 'stat')
 
 
 class MetaInfoDetailSerializer(serializers.ModelSerializer):

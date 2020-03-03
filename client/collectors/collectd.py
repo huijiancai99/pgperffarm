@@ -59,7 +59,8 @@ class CollectdCollector(object):
     def start(self):
         log("starting collectd")
         cmd = 'collectd -C %s -P %s' % (COLLECTD_CONFIG, COLLECTD_PIDFILE)
-        run_cmd(cmd.split(' '), env=self._env)
+        r = run_cmd(cmd.split(' '), env=self._env)
+        return r[1]
 
     def stop(self):
         log("stopping collectd")

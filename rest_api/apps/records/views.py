@@ -115,7 +115,9 @@ def TestRecordCreate(request, format=None):
 
 	try:
 		secret = request.META.get("HTTP_AUTHORIZATION")
+		print("1234")
 		ret = Machine.objects.filter(machine_secret=secret, state='A').get()
+		print('1')
 		test_machine = ret.id
 		if test_machine <= 0:
 			raise TestDataUploadError("The machine is unavailable.")

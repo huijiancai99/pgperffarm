@@ -92,6 +92,7 @@ class LinuxInfo(models.Model):
     cpuinfo = models.TextField(verbose_name="cpuinfo", help_text="cpuinfo", default="null")
     sysctl = models.TextField(verbose_name="sysctl", help_text="sysctl", default="null")
     meminfo = models.TextField(verbose_name="meminfo", help_text="meminfo", default="null")
+    stat = models.TextField(verbose_name="stat", help_text="stat", default="null")
 
     class Meta:
         verbose_name = "linux info"

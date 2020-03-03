@@ -138,8 +138,8 @@ class BenchmarkRunner(object):
 
     def _upload_results(self, results):
 
-        postdata = results  
-        post = []  
+        postdata = results
+        post = []
         post.append(postdata)
 
         headers = {'Content-Type': 'application/json; charset=utf-8', 'Authorization': self._secret}
@@ -150,7 +150,7 @@ class BenchmarkRunner(object):
         'run all the configured benchmarks'
 
         # Removing the existing directory
-        
+
         try:
             os.mkdir(self._output)
         except OSError as e:

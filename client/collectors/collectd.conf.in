@@ -31,10 +31,10 @@ Interval    60
 LoadPlugin logfile
 
 <Plugin logfile>
-	LogLevel info
-	File STDOUT
+	LogLevel 'debug'
+	File ""/tmp/collectd.log"
 	Timestamp true
-	PrintSeverity false
+	PrintSeverity true
 </Plugin>
 
 ##############################################################################
