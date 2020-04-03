@@ -2,9 +2,22 @@ import os
 
 from utils.logging import log
 from utils.misc import run_cmd
+from rrdtool import fetch
 
 COLLECTD_CONFIG = '/tmp/.collectd.conf'
 COLLECTD_PIDFILE = '/tmp/.collectd.pid'
+RESULT_FOLDER = '/var/lib/collectd/rrd/ubuntu/cpu-0/'
+RESULT_CONTENT = [
+            'idle',
+            'interrupt',
+            'nice',
+            'softirq',
+            'steal',
+            'system',
+            'user',
+            'wait'
+            ]
+
 
 
 class CollectdCollector(object):
@@ -72,7 +85,14 @@ class CollectdCollector(object):
             log('collectd pid not found - processes may still be running')
 
     def result(self):
-        return {}
+        result_keyset = ['cpu_' + x for x in RESULT_CONTENT]
+        r = dict.fromkeys(result_keyset, 'nan')
+        for content in RESULT_CONTENT:
+            filename = RESULT_FOLDER + 'cpu-' + content + '.rrd'
+            temp = fetch(filename, 'AVERAGE')
+            valid = [x[0] for x in temp[2] if x[0] != None]
+            r['cpu_' + content] = sum(valid) / len(valid)
+        return r
 
 
 def run_collector(in_queue, out_queue, dbname, bin_path, outdir, interval=1.0):
